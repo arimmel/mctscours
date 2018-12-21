@@ -1,0 +1,192 @@
+\documentclass[compress, color = usenames, dvipsnames]{beamer}
+
+% theme CentraleSupelec
+\usepackage{theme/beamerthemeCS}
+
+% liste de paquets
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage{xstring}
+\usepackage{tikz}
+\usetikzlibrary{shapes.arrows,chains,fit, calc,positioning, intersections}
+\usepackage{pgfplots}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{hyperref}
+\usepackage{multimedia}
+\usepackage{ifthen}
+
+\usepackage{xcolor}% http://ctan.org/pkg/xcolor
+\usepackage{colortbl}
+
+\usepackage{pifont}
+\usepackage{textcomp}
+\usepackage{textpos}
+
+\usepackage{soul}
+%\usepackage{algorithmic}
+\usepackage{algpseudocode}
+
+
+
+% première page
+\title[Monte Carlo Tree Search]{Monte Carlo Tree Search}
+\subtitle[]{}
+\date[ST2 ~-- Gif]{\large ST2 ~-- Gif}
+\institute[]{\large CentraleSupélec -- Gif}
+
+
+\begin{document}
+
+\frame{
+  \titlepage
+}
+
+
+
+\section{Introduction}
+\frame{
+  \frametitle{Problématique rencontrée}
+
+  \begin{block}{Problème concret}
+    \begin{itemize}
+    \item Étant donné une liste de ville et les distances entre ces villes, quel est le plus court chemin qui passe une fois par chaque ville et termine à la ville de départ?
+    \end{itemize}
+  \end{block}
+
+  \begin{center}
+  %\includegraphics[width=0.5\textwidth]{figs/TSP.png}
+  \end{center}
+  
+  C'est le problème du \purple{voyageur de commerce} (en anglais \emph{Traveling Salesman Problem} ou \purple{TSP}).
+
+}
+
+
+\section{Construction de l'Arbre}
+\frame{
+  \frametitle{Gérer la complexité} 
+  
+  Beaucoup de problèmes d'optimisation rencontrés sont
+  $NP$-complet. Il est donc nécessaire de développer des méthodes pour
+  les traiter au mieux.
+
+  \begin{block}{Méthodes de résolution}
+    \begin{itemize}
+        \item Méthodes exactes \alt<2> { - \red{Cours 9}} {(\textbf{Branch \& Bound}, Programmation Linéaire, \ldots)}        
+        \item Heuristiques dédiées \alt<2> { - \blue{Cours 10}} {(\textbf{d'approximation} ou sans garantie de performance)}
+        \item Métaheuristiques \alt<2> { - \blue{Cours 10}} {(\textbf{Recuit Simulé}, Tabou, Algorithmes Génétiques, \ldots)}
+    \end{itemize}
+  \end{block}
+}
+
+\section{Simulation Monte Carlo}
+\frame{
+  \frametitle{Algorithme}
+
+
+
+  \begin{block}{Algorithme}
+      \begin{algorithmic}[1]
+	
+       \Function{$backtracking$}{$s$}
+          \If{ $terminal(s)$}
+          \State \Return $verify(s)$
+          \EndIf
+          \ForAll{ $c \in children(s)$}
+          \If{ $backtracking(c)$}
+          \State \Return $TRUE$
+          \EndIf
+          \EndFor
+          \State \Return $FALSE$
+        \EndFunction
+      \end{algorithmic}
+  \end{block}
+}
+
+\section{Problème de Bandit}
+\frame{
+  \frametitle{Efficacité de la borne: cas du voyageur de commerce}
+
+  \begin{alertblock}{Remarques}
+      \begin{itemize}
+          \item Le parcours doit passer par toutes les villes.
+          \item Pour chaque ville il faut arriver et repartir.
+          \itemSo Au mieux, pour chaque ville, on arrivera et on repartira par les deux arcs les plus petits
+        \end{itemize}
+  \end{alertblock}
+  \onslide<2>{
+  \begin{block}{Idée}
+  La borne utilise les distances aux deux voisins les plus proches
+  \end{block}
+  }
+
+\begin{center}
+\begin{tikzpicture}[scale=0.5, every node/.style={transform shape}]]
+    \node [circle,draw] (a) at (0,0) {a};
+    \node [circle,draw] (b) at (3,0) {b};
+    \node [circle,draw] (c) at (6,0) {c};
+    \node [circle,draw] (d) at (0,-4) {d};
+    \node [circle,draw] (e) at (-3,-4) {e};
+
+    \draw [dashed] (a) -- (b) node [pos=0.5]{\only<1>{3}\only<2>{\textbf{\red{3}}}};
+    \draw [dashed] (a) -- (d) node [pos=0.3]{\only<1>{4}\only<2>{\textbf{\red{4}}}};
+    \draw [dashed] (a) -- (e) node [pos=0.5]{\only<1>{5}\only<2>{\textbf{\red{5}}}};
+  
+    \draw [dashed] (b) -- (c) node [pos=0.5]{\only<1>{3}\only<2>{\textbf{\red{3}}}};
+    \draw [dashed] (b) -- (d) node [pos=0.3]{5};
+    \draw [dashed] (b) -- (e) node [pos=0.3]{7};
+  
+    \draw [dashed] (c) -- (d) node [pos=0.5]{\only<1>{7}\only<2>{\textbf{\red{7}}}};
+    \draw [dashed] (c) -- (e) node [pos=0.3]{10};
+  
+    \draw [dashed] (d) -- (e) node [pos=0.5]{\only<1>{3}\only<2>{\textbf{\red{3}}}};
+\end{tikzpicture}
+\end{center}
+}
+
+\section{Amélioration de l'Algorithme}
+\frame{
+  \frametitle{Exemple borne}
+
+\centering
+
+\begin{tikzpicture}
+
+    \node [circle,draw] (a) at (0,0) {a};
+    \node [circle,draw] (b) at (3,0) {b};
+    \node [circle,draw] (c) at (6,0) {c};
+    \node [circle,draw] (d) at (0,-4) {d};
+    \node [circle,draw] (e) at (-3,-4) {e};
+
+    \draw [dashed] (a) -- (b) node [pos=0.5]{\textbf{3}};
+    \draw [dashed] (a) -- (d) node [pos=0.3]{\textbf{4}};
+    \draw [dashed] (a) -- (e) node [pos=0.5]{\textbf{5}};
+  
+    \draw [dashed] (b) -- (c) node [pos=0.5]{\textbf{3}};
+    \draw [dashed] (b) -- (d) node [pos=0.3]{5};
+    \draw [dashed] (b) -- (e) node [pos=0.3]{7};
+  
+    \draw [dashed] (c) -- (d) node [pos=0.5]{\textbf{7}};
+    \draw [dashed] (c) -- (e) node [pos=0.3]{10};
+  
+    \draw [dashed] (d) -- (e) node [pos=0.5]{\textbf{3}};
+\end{tikzpicture}
+
+    \begin{block}{Calcul de la borne}
+        trajet déjà effectué = $\emptyset$
+
+        $(\underbrace{3+4}_{a}+\underbrace{3+3}_{b}+\underbrace{3+7}_{c}+\underbrace{3+4}_{d}+\underbrace{3+5}_{e})/2=19$
+    \end{block}
+
+}
+\section{Conclusion}
+
+
+
+
+
+
+
+\end{document}
