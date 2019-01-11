@@ -31,9 +31,9 @@
 
 
 % première page
-\title[Monte Carlo Tree Search]{Monte Carlo Tree Search}
+\title[Jeu de Go \\ et \\ Exploration d'Arbre par Bandit]{Jeu de Go \\ et \\ Exploration d'Arbre par Bandit}
 \subtitle[]{}
-\date[ST2 ~-- Gif]{\large ST2 ~-- Gif}
+\date[]{}
 \institute[]{\large CentraleSupélec -- Gif}
 
 
@@ -45,7 +45,77 @@
 
 
 
-\section{Introduction}
+
+\section{Jeu de Go}
+
+\subsection{Pourquoi le Jeu de Go?}
+
+\frame{
+  \frametitle{Pourquoi un jeu?}
+
+}
+
+\frame{
+  \frametitle{Importance du jeu de Go}
+
+  historique
+
+  nombre de joueurs
+
+
+}
+
+
+\subsection{Règle du Jeu}
+
+\frame{
+  \frametitle{Règles}
+
+}
+
+\frame{
+  \frametitle{Echelle de niveau}
+
+}
+
+\section{Avant l'Exploration d'Arbre par Bandit}
+
+\frame{
+  \frametitle{Découpage du plateau}
+
+}
+\frame{
+  \frametitle{Règles expertes}
+
+}
+\frame{
+  \frametitle{Alpha beta}
+
+}
+
+\section{Exploration d'Arbre par Bandit}
+
+\subsection{Construction de l'Arbre}
+
+
+\subsection{Problème de Bandit}
+
+\subsection{Amélioration de l'Algorithme}
+
+\frame{
+  \frametitle{RAVE}
+
+}
+
+\frame{
+  \frametitle{Deep Learning}
+
+}
+
+\section{Conclusion}
+
+
+
 \frame{
   \frametitle{Problématique rencontrée}
 
@@ -64,89 +134,7 @@
 }
 
 
-\section{Construction de l'Arbre}
-\frame{
-  \frametitle{Gérer la complexité} 
-  
-  Beaucoup de problèmes d'optimisation rencontrés sont
-  $NP$-complet. Il est donc nécessaire de développer des méthodes pour
-  les traiter au mieux.
 
-  \begin{block}{Méthodes de résolution}
-    \begin{itemize}
-        \item Méthodes exactes \alt<2> { - \red{Cours 9}} {(\textbf{Branch \& Bound}, Programmation Linéaire, \ldots)}        
-        \item Heuristiques dédiées \alt<2> { - \blue{Cours 10}} {(\textbf{d'approximation} ou sans garantie de performance)}
-        \item Métaheuristiques \alt<2> { - \blue{Cours 10}} {(\textbf{Recuit Simulé}, Tabou, Algorithmes Génétiques, \ldots)}
-    \end{itemize}
-  \end{block}
-}
-
-\section{Simulation Monte Carlo}
-\frame{
-  \frametitle{Algorithme}
-
-
-
-  \begin{block}{Algorithme}
-      \begin{algorithmic}[1]
-	
-       \Function{$backtracking$}{$s$}
-          \If{ $terminal(s)$}
-          \State \Return $verify(s)$
-          \EndIf
-          \ForAll{ $c \in children(s)$}
-          \If{ $backtracking(c)$}
-          \State \Return $TRUE$
-          \EndIf
-          \EndFor
-          \State \Return $FALSE$
-        \EndFunction
-      \end{algorithmic}
-  \end{block}
-}
-
-\section{Problème de Bandit}
-\frame{
-  \frametitle{Efficacité de la borne: cas du voyageur de commerce}
-
-  \begin{alertblock}{Remarques}
-      \begin{itemize}
-          \item Le parcours doit passer par toutes les villes.
-          \item Pour chaque ville il faut arriver et repartir.
-          \itemSo Au mieux, pour chaque ville, on arrivera et on repartira par les deux arcs les plus petits
-        \end{itemize}
-  \end{alertblock}
-  \onslide<2>{
-  \begin{block}{Idée}
-  La borne utilise les distances aux deux voisins les plus proches
-  \end{block}
-  }
-
-\begin{center}
-\begin{tikzpicture}[scale=0.5, every node/.style={transform shape}]]
-    \node [circle,draw] (a) at (0,0) {a};
-    \node [circle,draw] (b) at (3,0) {b};
-    \node [circle,draw] (c) at (6,0) {c};
-    \node [circle,draw] (d) at (0,-4) {d};
-    \node [circle,draw] (e) at (-3,-4) {e};
-
-    \draw [dashed] (a) -- (b) node [pos=0.5]{\only<1>{3}\only<2>{\textbf{\red{3}}}};
-    \draw [dashed] (a) -- (d) node [pos=0.3]{\only<1>{4}\only<2>{\textbf{\red{4}}}};
-    \draw [dashed] (a) -- (e) node [pos=0.5]{\only<1>{5}\only<2>{\textbf{\red{5}}}};
-  
-    \draw [dashed] (b) -- (c) node [pos=0.5]{\only<1>{3}\only<2>{\textbf{\red{3}}}};
-    \draw [dashed] (b) -- (d) node [pos=0.3]{5};
-    \draw [dashed] (b) -- (e) node [pos=0.3]{7};
-  
-    \draw [dashed] (c) -- (d) node [pos=0.5]{\only<1>{7}\only<2>{\textbf{\red{7}}}};
-    \draw [dashed] (c) -- (e) node [pos=0.3]{10};
-  
-    \draw [dashed] (d) -- (e) node [pos=0.5]{\only<1>{3}\only<2>{\textbf{\red{3}}}};
-\end{tikzpicture}
-\end{center}
-}
-
-\section{Amélioration de l'Algorithme}
 \frame{
   \frametitle{Exemple borne}
 
@@ -181,12 +169,45 @@
     \end{block}
 
 }
-\section{Conclusion}
+
+\frame{
+  \frametitle{Efficacité de la borne: cas du voyageur de commerce}
+
+  \begin{alertblock}{Remarques}
+      \begin{itemize}
+          \item Le parcours doit passer par toutes les villes.
+          \item Pour chaque ville il faut arriver et repartir.
+          \itemSo Au mieux, pour chaque ville, on arrivera et on repartira par les deux arcs les plus petits
+        \end{itemize}
+  \end{alertblock}
+  \onslide<2>{
+  \begin{block}{Idée}
+  La borne utilise les distances aux deux voisins les plus proches
+  \end{block}
+  }
+
+}
+
+\frame{
+  \frametitle{Algorithme}
 
 
 
-
-
-
-
+  \begin{block}{Algorithme}
+      \begin{algorithmic}[1]
+	
+       \Function{$backtracking$}{$s$}
+          \If{ $terminal(s)$}
+          \State \Return $verify(s)$
+          \EndIf
+          \ForAll{ $c \in children(s)$}
+          \If{ $backtracking(c)$}
+          \State \Return $TRUE$
+          \EndIf
+          \EndFor
+          \State \Return $FALSE$
+        \EndFunction
+      \end{algorithmic}
+  \end{block}
+}
 \end{document}
