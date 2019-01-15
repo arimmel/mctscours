@@ -47,8 +47,13 @@
   \frametitle{IA et Jeu de Go}
 
   \begin{center}
-  \includegraphics[width=0.8\textwidth]{figs/go-intro.jpg}
+  \includegraphics[width=0.8\textwidth]{figs/badukia.jpg}
   \end{center}
+
+  \begin{itemize}
+      \item 2016: AlphaGo bat le meilleur joueur humain 
+      \item Combine des méthodes de \textbf{deep learning} avec une \red{exploration d'arbre par bandit}
+  \end{itemize}
 
 }
 
@@ -81,7 +86,7 @@
   \frametitle{Pourquoi le jeu de Go?}
 
   \begin{center}
-  \includegraphics[width=0.5\textwidth]{figs/badukia.jpg}
+  \includegraphics[width=0.5\textwidth]{figs/go-intro.jpg}
   \end{center}
 
   \begin{itemize}
@@ -143,18 +148,49 @@
 \frame{
   \frametitle{Règles: placement}
 
-  Chaque joueur pose une pierre à tour de rôle
-  Pierres posées sur les intersections
-  Blanc commence
+  \begin{itemize}
+    \item Début de la partie: le plateau est vide
+    \item Chaque joueur pose une pierre à tour de rôle
+    \item Noir commence
+    \item Pierres posées sur les intersections
+  \end{itemize}
+
+  \begin{center}
+      \only<1> { \includegraphics[width=0.4\textwidth]{figs/gorule1.png} }
+      \only<2> { \includegraphics[width=0.4\textwidth]{figs/gorule2.png} }
+      \only<3> { \includegraphics[width=0.4\textwidth]{figs/gorule3.png} }
+  \end{center}
+
 
 }
 
 \frame{
-  \frametitle{Règles: chaînes et capture}
+  \frametitle{Règles: chaînes et libertés}
 
-  pierres reliées horizontalement ou verticalement forment une chaine
-  emplacement libre autour d'une chaine: liberté
-  enlever la dernière liberté d'une chaine: capture
+  \begin{itemize}
+      \item Pierres reliées horizontalement ou verticalement: \textbf{une chaine}
+      \item Emplacements libres autour d'une chaine: \textbf{liberté}
+  \end{itemize}
+
+  \begin{center}
+      \only<1> { \includegraphics[width=0.4\textwidth]{figs/gorule_string.png} }
+      \only<2> { \includegraphics[width=0.4\textwidth]{figs/gorule_liberty1.png} }
+      \only<3> { \includegraphics[width=0.4\textwidth]{figs/gorule_liberty2.png} }
+      \only<4> { \includegraphics[width=0.4\textwidth]{figs/gorule_liberty3.png} }
+      \only<5> { \includegraphics[width=0.4\textwidth]{figs/gorule_liberty4.png} }
+  \end{center}
+
+}
+
+\frame{
+  \frametitle{Règles: capture}
+
+  \begin{itemize}
+      \item Pierres reliées horizontalement ou verticalement: \textbf{une chaine}
+      \item Emplacements libres autour d'une chaine: \textbf{liberté}
+      \item Enlever la dernière liberté d'une chaine: \textbf{capture}
+      \itemSo les pierres sont enlevées du plateau
+  \end{itemize}
 
 }
 
