@@ -156,9 +156,9 @@
   \end{itemize}
 
   \begin{center}
-      \only<1> { \includegraphics[width=0.4\textwidth]{figs/gorule1.png} }
-      \only<2> { \includegraphics[width=0.4\textwidth]{figs/gorule2.png} }
-      \only<3> { \includegraphics[width=0.4\textwidth]{figs/gorule3.png} }
+    %  \only<1> { \includegraphics[width=0.4\textwidth]{figs/gorule1.png} }
+    %  \only<2> { \includegraphics[width=0.4\textwidth]{figs/gorule2.png} }
+    %  \only<3> { \includegraphics[width=0.4\textwidth]{figs/gorule3.png} }
   \end{center}
 
 
@@ -172,12 +172,13 @@
       \item Emplacements libres autour d'une chaine: \textbf{liberté}
   \end{itemize}
 
+  TODO image
   \begin{center}
-      \only<1> { \includegraphics[width=0.4\textwidth]{figs/gorule_string.png} }
-      \only<2> { \includegraphics[width=0.4\textwidth]{figs/gorule_liberty1.png} }
-      \only<3> { \includegraphics[width=0.4\textwidth]{figs/gorule_liberty2.png} }
-      \only<4> { \includegraphics[width=0.4\textwidth]{figs/gorule_liberty3.png} }
-      \only<5> { \includegraphics[width=0.4\textwidth]{figs/gorule_liberty4.png} }
+    %  \only<1> { \includegraphics[width=0.4\textwidth]{figs/gorule_string.png} }
+    %  \only<2> { \includegraphics[width=0.4\textwidth]{figs/gorule_liberty1.png} }
+    %  \only<3> { \includegraphics[width=0.4\textwidth]{figs/gorule_liberty2.png} }
+    %  \only<4> { \includegraphics[width=0.4\textwidth]{figs/gorule_liberty3.png} }
+    %  \only<5> { \includegraphics[width=0.4\textwidth]{figs/gorule_liberty4.png} }
   \end{center}
 
 }
@@ -186,58 +187,133 @@
   \frametitle{Règles: capture}
 
   \begin{itemize}
-      \item Pierres reliées horizontalement ou verticalement: \textbf{une chaine}
-      \item Emplacements libres autour d'une chaine: \textbf{liberté}
       \item Enlever la dernière liberté d'une chaine: \textbf{capture}
       \itemSo les pierres sont enlevées du plateau
   \end{itemize}
 
+  TODO image
 }
 
 \frame{
   \frametitle{Règles: fin de partie}
 
-  les deux joueurs passent
-  score
+  \begin{itemize}
+      \item partie terminée quand les deux joueurs passent
+      \item score: pierres + territoire
+  \end{itemize}
 
+  TODO image
 }
 
 \frame{
   \frametitle{Règles: le ko}
 
+  TODO image
   \begin{center}
   %\includegraphics[width=0.8\textwidth]{figs/goko.gif}
   \end{center}
-  illustration
-  histoire
-  règle humain/ordinateur
+
+  \begin{itemize}
+      \item problème: captures répétées successives
+      \item règle (humain): pas le droit de remettre le plateau dans l'état juste avant
+      \item règle (ordinateur): pas le droit de remettre le plateau dans n'importe quel état précédant
+  \end{itemize}
+
+
 
 }
 
 \frame{
   \frametitle{Echelle de niveau}
 
+
+  TODO tikz
 }
 
 \section{Avant l'Exploration d'Arbre par Bandit}
 
 \frame{
-  \frametitle{Présentation}
+  \frametitle{Principe}
+
+  \begin{itemize}
+      \item Exploration d'arbre \red{alphabeta}
+      \item Evaluation des noeuds basée sur des \red{connaissances expertes}
+  \end{itemize}
+
+  \begin{center}
+    \includegraphics[width=0.8\textwidth]{figs/alphabetago.png}
+  \end{center}
 
 }
 
 \frame{
-  \frametitle{Alpha beta}
+  \frametitle{Evaluation}
+
+  \begin{itemize}
+      \item \red{Découpage} du plateau en sous parties
+      \item \red{Evaluation} de chaque sous partie par \textbf{recherche locale} (souvent alphabeta)
+      \itemSo groupe mort, vivant, territoire, ...
+      \item \red{Recomposition} d'un score global
+  \end{itemize}
+
+
+}
+
+\frame{
+  \frametitle{Position à évaluer}
+
+  \begin{center}
+    \includegraphics[width=0.7\textwidth]{figs/alphabeta_poseval.png}
+  \end{center}
 
 }
 
 \frame{
   \frametitle{Découpage du plateau}
 
+  \begin{center}
+    \includegraphics[width=0.8\textwidth]{figs/alphabeta_decoupage.png}
+  \end{center}
+
 }
 
 \frame{
-  \frametitle{Règles expertes}
+  \frametitle{Evaluation locale}
+
+  \begin{center}
+    \includegraphics[width=0.8\textwidth]{figs/alphabeta_but.png}
+  \end{center}
+
+}
+
+\frame{
+  \frametitle{Evaluation globale}
+
+  \begin{center}
+    \includegraphics[width=0.7\textwidth]{figs/alphabeta_globaleval.png}
+  \end{center}
+
+}
+
+
+\frame{
+  \frametitle{Avantages}
+
+  \begin{itemize}
+      \item Algorithme \red{très rapide}
+      \item Evaluation locale peut être très performante
+  \end{itemize}
+
+}
+
+\frame{
+  \frametitle{Inconvénients}
+
+  \begin{itemize}
+      \item Découpage et recomposition difficile et ayant un fort impact
+      \item Pas d'\textbf{intéraction} entre les positions locales
+      \item Demande beaucoup de \textbf{connaissances expertes}
+  \end{itemize}
 
 }
 
@@ -248,7 +324,46 @@
 
 \section{Exploration d'Arbre par Bandit}
 
+
 \subsection{Construction de l'Arbre}
+
+\frame{
+  \frametitle{Idée}
+
+  \begin{itemize}
+      \item Arbre \red{déséquilibré}
+      \itemSo TODO
+      \item Construction itérative 
+  \end{itemize}
+
+}
+
+\frame{
+  \frametitle{Principe}
+
+  \begin{itemize}
+      \item Répétition de ces 3 étapes:
+          TODO
+  \end{itemize}
+
+}
+
+\frame{
+  \frametitle{Exemple}
+
+  TODO tikz
+}
+
+\frame{
+  \frametitle{Questions}
+
+  TODO
+  \begin{itemize}
+      \item Comment faire l'évaluation?
+      \item Comment faire la descente?
+  \end{itemize}
+
+}
 
 
 \subsection{Problème de Bandit}
@@ -363,6 +478,15 @@
 
 
 
+\begin{frame}
+    \frametitle{Rappel MCTS}
+
+    TODO rappel l'algo
+    TODO rappel question: comment faire la descente?
+
+
+\end{frame}
+
 
 \begin{frame}
     \frametitle{Descente dans l'arbre}
@@ -386,74 +510,101 @@
     
 \end{frame}
 
+\begin{frame}
+    \frametitle{Améliorations}
+    \begin{itemize}
+        \item Réduire le nombre de bras du bandit
+        \item Ajout de connaissances expertes 
+        \item AMAF
+        \item ...
+    \end{itemize}
+    
+\end{frame}
 
-\subsection{Amélioration de l'Algorithme}
+
 
 \frame{
-  \frametitle{AMAF}
+  \frametitle{Echelle de niveau}
 
+  TODO
 }
 
 \frame{
-  \frametitle{Ajout de Connaissances Expertes}
+  \frametitle{Première victoire en 9x9}
 
+  TODO
 }
 
-\section{Aller plus loin}
+\section{Conclusion}
 
 \frame{
-  \frametitle{Deep Learning}
+  \frametitle{Alphago}
 
+  TODO principe en 1 slide
+}
+
+\frame{
+  \frametitle{Echelle de niveau}
+
+  TODO
 }
 
 \frame{
   \frametitle{Autres applications}
 
+  TODO
 }
 
 \frame{
   \frametitle{Conclusion}
 
+  TODO
 }
-
-
-
-
 
 \frame{
-  \frametitle{Exemple borne}
-
-\centering
-
-\begin{tikzpicture}
-
-    \node [circle,draw] (a) at (0,0) {a};
-    \node [circle,draw] (b) at (3,0) {b};
-    \node [circle,draw] (c) at (6,0) {c};
-    \node [circle,draw] (d) at (0,-4) {d};
-    \node [circle,draw] (e) at (-3,-4) {e};
-
-    \draw [dashed] (a) -- (b) node [pos=0.5]{\textbf{3}};
-    \draw [dashed] (a) -- (d) node [pos=0.3]{\textbf{4}};
-    \draw [dashed] (a) -- (e) node [pos=0.5]{\textbf{5}};
-  
-    \draw [dashed] (b) -- (c) node [pos=0.5]{\textbf{3}};
-    \draw [dashed] (b) -- (d) node [pos=0.3]{5};
-    \draw [dashed] (b) -- (e) node [pos=0.3]{7};
-  
-    \draw [dashed] (c) -- (d) node [pos=0.5]{\textbf{7}};
-    \draw [dashed] (c) -- (e) node [pos=0.3]{10};
-  
-    \draw [dashed] (d) -- (e) node [pos=0.5]{\textbf{3}};
-\end{tikzpicture}
-
-    \begin{block}{Calcul de la borne}
-        trajet déjà effectué = $\emptyset$
-
-        $(\underbrace{3+4}_{a}+\underbrace{3+3}_{b}+\underbrace{3+7}_{c}+\underbrace{3+4}_{d}+\underbrace{3+5}_{e})/2=19$
-    \end{block}
+  \frametitle{References}
+  TODO
 
 }
+
+
+
+
+
+%\frame{
+%  \frametitle{Exemple borne}
+%
+%\centering
+%
+%\begin{tikzpicture}
+%
+%    \node [circle,draw] (a) at (0,0) {a};
+%    \node [circle,draw] (b) at (3,0) {b};
+%    \node [circle,draw] (c) at (6,0) {c};
+%    \node [circle,draw] (d) at (0,-4) {d};
+%    \node [circle,draw] (e) at (-3,-4) {e};
+%
+%    \draw [dashed] (a) -- (b) node [pos=0.5]{\textbf{3}};
+%    \draw [dashed] (a) -- (d) node [pos=0.3]{\textbf{4}};
+%    \draw [dashed] (a) -- (e) node [pos=0.5]{\textbf{5}};
+%  
+%    \draw [dashed] (b) -- (c) node [pos=0.5]{\textbf{3}};
+%    \draw [dashed] (b) -- (d) node [pos=0.3]{5};
+%    \draw [dashed] (b) -- (e) node [pos=0.3]{7};
+%  
+%    \draw [dashed] (c) -- (d) node [pos=0.5]{\textbf{7}};
+%    \draw [dashed] (c) -- (e) node [pos=0.3]{10};
+%  
+%    \draw [dashed] (d) -- (e) node [pos=0.5]{\textbf{3}};
+%\end{tikzpicture}
+%
+%    \begin{block}{Calcul de la borne}
+%        trajet déjà effectué = $\emptyset$
+%
+%        $(\underbrace{3+4}_{a}+\underbrace{3+3}_{b}+\underbrace{3+7}_{c}+\underbrace{3+4}_{d}+\underbrace{3+5}_{e})/2=19$
+%    \end{block}
+%
+%}
 
 
 \end{document}
