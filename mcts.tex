@@ -47,7 +47,7 @@
   \frametitle{IA et Jeu de Go}
 
   \begin{center}
-  \includegraphics[width=0.8\textwidth]{figs/badukia.jpg}
+  \includegraphics[width=0.8\textwidth]{figs/badukIA.jpg}
   \end{center}
 
   \begin{itemize}
@@ -63,27 +63,10 @@
 \section{IA et Jeu de Go}
 
 
-\subsection{Pourquoi une IA pour le Jeu de Go?}
+
 
 \frame{
-  \frametitle{Pourquoi une IA pour un jeu?}
-
-  \begin{center}
-  \includegraphics[width=0.5\textwidth]{figs/aigame.jpg}
-  \end{center}
-  \begin{itemize}
-      \item Avoir une IA pour un jeu...
-      \item Représentation des \red{problèmes de décision}
-      \item \textbf{Environnement} bien défini: règles du jeu
-      \item \textbf{Évaluation} facile: score
-      \item \red{Challenge} de battre les humains
-  \end{itemize}
-
-
-}
-
-\frame{
-  \frametitle{Pourquoi le jeu de Go?}
+  \frametitle{Pourquoi une IA pour le jeu de go?}
 
   \begin{center}
   \includegraphics[width=0.5\textwidth]{figs/go-intro.jpg}
@@ -98,7 +81,6 @@
 }
 
 
-\subsection{Le Jeu de Go}
 
 \frame{
   \frametitle{Histoire}
@@ -242,7 +224,7 @@
 }
 
 \frame{
-  \frametitle{Echelle de niveau}
+  \frametitle{Échelle de niveau}
 
 
   TODO tikz
@@ -255,7 +237,7 @@
 
   \begin{itemize}
       \item Exploration d'arbre \red{alphabeta}
-      \item Evaluation des noeuds basée sur des \red{connaissances expertes}
+      \item Évaluation des nœuds basée sur des \red{connaissances expertes}
   \end{itemize}
 
   \begin{center}
@@ -265,11 +247,11 @@
 }
 
 \frame{
-  \frametitle{Evaluation}
+  \frametitle{Évaluation}
 
   \begin{itemize}
       \item \red{Découpage} du plateau en sous parties
-      \item \red{Evaluation} de chaque sous partie par \textbf{recherche locale} (souvent alphabeta)
+      \item \red{Évaluation} de chaque sous partie par \textbf{recherche locale} (souvent alphabeta)
       \itemSo groupe mort, vivant, territoire, ...
       \item \red{Recomposition} d'un score global
   \end{itemize}
@@ -296,7 +278,7 @@
 }
 
 \frame{
-  \frametitle{Evaluation locale}
+  \frametitle{Évaluation locale}
 
   \begin{center}
     \includegraphics[width=0.8\textwidth]{figs/alphabeta_but.png}
@@ -305,7 +287,7 @@
 }
 
 \frame{
-  \frametitle{Evaluation globale}
+  \frametitle{Évaluation globale}
 
   \begin{center}
     \includegraphics[width=0.7\textwidth]{figs/alphabeta_globaleval.png}
@@ -319,7 +301,7 @@
 
   \begin{itemize}
       \item Algorithme \red{très rapide}
-      \item Evaluation locale peut être très performante
+      \item Évaluation locale peut être très performante
   \end{itemize}
 
 }
@@ -329,7 +311,7 @@
 
   \begin{itemize}
       \item Découpage et recomposition difficile et ayant un fort impact
-      \item Pas d'\textbf{intéraction} entre les positions locales
+      \item Pas d'\textbf{interaction} entre les positions locales
       \item Demande beaucoup de \textbf{connaissances expertes}
   \end{itemize}
 
@@ -542,7 +524,7 @@
 
 
 \frame{
-  \frametitle{Echelle de niveau}
+  \frametitle{Échelle de niveau}
 
   TODO
 }
@@ -562,7 +544,7 @@
 }
 
 \frame{
-  \frametitle{Echelle de niveau}
+  \frametitle{Échelle de niveau}
 
   TODO
 }
