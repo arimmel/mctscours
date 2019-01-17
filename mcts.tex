@@ -41,6 +41,9 @@
 
 \frame{
   \titlepage
+  TODO add references everywhere
+  TODO section bandit
+  TODO tout relire
 }
 
 \iftrue
@@ -492,19 +495,57 @@
     %}
 
 \end{tikzpicture}
-TODO evaluation/descente sur derniere image
+}
+
+\frame{
+  \frametitle{Exemple}
+
+\centering
+
+\begin{tikzpicture}
+
+    %nodes
+
+    \node [thick,circle,draw,color=blue] (a) at (0,4) {3/5};
+
+        \node [thick,circle,draw] (bb) at (2,2) {0/1};
+        \draw [thick,->] (a) -- (bb);
+
+        \node [thick,circle,draw,color=blue] (ba) at (-2,2) {2/3}; 
+        \draw [thick,->,color=blue] (a) -- (ba);
+
+        \node [thick,circle,draw] (ca) at (-3,0) {0/1};
+        \draw [thick,->] (ba) -- (ca);
+
+        \node [very thick,circle,draw,color=blue,fill=blue!10] (cbs) at (-1,0) {1/1};
+        \draw [thick,->,color=blue] (ba) -- (cbs);
+        \node [] (cbres) at (-1,-3) {\textbf{1}};
+        \draw [thick,decorate,decoration=snake,->] (cbs) -- (cbres);
+
+        \node [color=blue] at (-3,3.5) {\textbf{Descente}};
+        \node [] at (0.5,-1.5) {\textbf{Évaluation}};
+\end{tikzpicture}
 }
 
 \iftrue
 
 
 \frame{
-  \frametitle{Evaluation}
+  \frametitle{Évaluation}
 
-  TODO
+  \textbf{Monte Carlo}
   \begin{itemize}
-      \item todo
+      \item Choix \red{aléatoire} d'un coup jusqu'à la fin de la partie
   \end{itemize}
+
+  Propriétés
+  \begin{itemize}
+      \item méthode générique
+      \item facile à implémenter
+      \item \textbf{non biaisé}
+      \item possibilité d'intégrer des connaissances expertes en utilisant une distribution non uniforme
+  \end{itemize}
+  A l'origine du nom \textbf{Monte Carlo Tree Search} mais cette évaluation peut être remplacée
 
 }
 
@@ -620,15 +661,37 @@ TODO evaluation/descente sur derniere image
 \end{frame}
 
 
+\frame{
+  \frametitle{Rappel}
 
-\begin{frame}
-    \frametitle{Rappel MCTS}
+\centering
 
-    TODO rappel l'algo
-    TODO rappel question: comment faire la descente?
+\begin{tikzpicture}
+
+    %nodes
+
+    \node [thick,circle,draw,color=blue] (a) at (0,4) {3/5};
+
+        \node [thick,circle,draw] (bb) at (2,2) {0/1};
+        \draw [thick,->] (a) -- (bb);
+
+        \node [thick,circle,draw,color=blue] (ba) at (-2,2) {2/3}; 
+        \draw [thick,->,color=blue] (a) -- (ba);
+
+        \node [thick,circle,draw] (ca) at (-3,0) {0/1};
+        \draw [thick,->] (ba) -- (ca);
+
+        \node [very thick,circle,draw,color=blue,fill=blue!10] (cbs) at (-1,0) {1/1};
+        \draw [thick,->,color=blue] (ba) -- (cbs);
+        \node [] (cbres) at (-1,-3) {\textbf{1}};
+        \draw [thick,decorate,decoration=snake,->] (cbs) -- (cbres);
+
+        \node [color=blue] at (-3,3.5) {\textbf{Descente}};
+        \node [] at (0.5,-1.5) {\textbf{Évaluation}};
+\end{tikzpicture}
+}
 
 
-\end{frame}
 
 
 \begin{frame}
@@ -656,9 +719,12 @@ TODO evaluation/descente sur derniere image
 \begin{frame}
     \frametitle{Améliorations}
     \begin{itemize}
-        \item Réduire le nombre de bras du bandit
-        \item Ajout de connaissances expertes 
-        \item AMAF
+        \item Ordonner les bras du bandit
+        \itemSo limiter le nombre de bras explorés
+        \item Ajouter de connaissances expertes \cite{chaslot2009adding}
+        \itemSo modifier la formule de bandit ou la distribution de probabilité pour l'évaluation
+        \item Rapide Action Value Estimation (RAVE) \cite{gelly2007combining}
+        \itemSo prendre en compte le fait qu'inverser la séquence de coup peut donner le même résultat
         \item ...
     \end{itemize}
     
@@ -710,12 +776,15 @@ TODO evaluation/descente sur derniere image
 }
 
 \frame{
-  \frametitle{Première victoire en 9x9}
+  \frametitle{Première victoire en 9x9 en tant que joueur noir}
 
   \begin{columns}
       \begin{column}{0.6\textwidth}
           \begin{itemize}
-              \item TODO
+              \item programme: MoGoTW
+              \itemSo MCTS avec de nombreuses améliorations
+              \itemSo 32 machines de 8 coeurs
+              \item adversaire: C.-H. Chou (pro 9 dan)
           \end{itemize}
       \end{column}
       \begin{column}{0.4\textwidth} 
@@ -783,20 +852,22 @@ TODO evaluation/descente sur derniere image
 \frame{
   \frametitle{Autres applications}
 
-  TODO citation
   \begin{itemize}
       \item jeux:
   \begin{itemize}
       \item jeux de plateaux
-      \itemSo Havannah, Hex, ...
+      \itemSo Havannah \cite{ewals2012playing}, Hex \cite{arneson2009mohex}, ...
       \item jeux vidéos
-      \itemSo Ms. Pac-Man, ...
+      \itemSo Ms. Pac-Man \cite{pepels2014real}, ...
       \item jeux non déterministes
-      \itemSo poker, magic, ...
+      \itemSo Poker \cite{rubin2011computer}, Magic \cite{ward2009monte}, ...
   \end{itemize}
           \item autre:
   \begin{itemize}
-      \item todo
+      \item couplage de graphe \cite{pinheiro2017geometric}
+      \item planification \cite{nakhost2009monte}
+      \item calcul de transformée de Fourier rapide \cite{de2009bandit}
+      \item ...
   \end{itemize}
   \end{itemize}
 }
@@ -804,15 +875,24 @@ TODO evaluation/descente sur derniere image
 \frame{
   \frametitle{Conclusion}
 
+  \begin{center}
+  \includegraphics[width=0.3\textwidth]{figs/go-intro.jpg}
+  \includegraphics[width=0.25\textwidth]{figs/mcts_exemple.png}
+  \end{center}
+
+  \begin{itemize}
+      \item méthode d'exploration d'arbre \red{déséquilibré}
+      \item a permis de battre les meilleurs humains au jeu de \textbf{Go}
+      \item méthode \red{générique} pouvant être appliqué à d'autres problèmes
+  \end{itemize}
   TODO image
-  TODO texte
 }
 
-\frame{
-  \frametitle{References}
-  TODO
-
-}
+\begin{frame}[allowframebreaks]
+    \frametitle{Références}
+    \bibliographystyle{apalike}
+    \bibliography{mcts.bib}
+\end{frame}
 
 
 

@@ -1,0 +1,6 @@
+#!/bin/sh
+pdflatex mcts.tex
+pdflatex mcts.tex
+bibtex mcts
+pdflatex mcts.tex
+pdflatex mcts.tex
