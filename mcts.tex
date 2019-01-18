@@ -41,9 +41,6 @@
 
 \frame{
   \titlepage
-  TODO add references everywhere
-  TODO section bandit
-  TODO tout relire
 }
 
 \iftrue
@@ -402,6 +399,9 @@
 \end{tikzpicture}
 }
 
+
+\fi
+
 \section{Exploration d'Arbre par Bandit}
 
 
@@ -412,11 +412,16 @@
   \frametitle{Idée}
 
   \begin{itemize}
-      \item Certains coups sont très mauvais, inutile d'explorer tous leurs enfants
+      \item Certains coups sont mauvais, inutile d'explorer leurs enfants
       \itemSo construction d'un arbre \red{déséquilibré}
       \itemSo branches plus intéressantes explorées plus profondément
       \item Construction \textbf{itérative}
   \end{itemize}
+
+  \begin{center}
+    \includegraphics[width=0.7\textwidth]{figs/mcts_asym.png}
+  \end{center}
+
 
 }
 
@@ -428,10 +433,83 @@
     \includegraphics[width=1\textwidth]{figs/mcts-algorithm.png}
   \end{center}
 
+  \hfill \cite{chaslot2008monte}
+}
+
+\frame{
+  \frametitle{Descente}
+
+  \begin{center}
+    \includegraphics[width=0.3\textwidth]{figs/mcts_selection.png}
+  \end{center}
+
+  \begin{itemize}
+      \item partir de la \textbf{racine}
+      \item \red{choisir} un noeud fils (détaillé plus tard)
+      \item \textbf{répéter} récursivement
+      \item s'arrêter dès qu'on atteint un noeud en dehors de l'arbre (le noeud $frontier$)
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Extension}
+
+
+  \begin{center}
+    \includegraphics[width=0.3\textwidth]{figs/mcts_expansion.png}
+  \end{center}
+
+  \begin{itemize}
+      \item ajouter le noeud $frontier$ à l'arbre
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Evaluation}
+
+  \begin{columns}
+      \begin{column}{0.3\textwidth}
+          \begin{center}
+              \includegraphics[width=1\textwidth]{figs/mcts_simulation.png}
+          \end{center}
+      \end{column}
+      \begin{column}{0.7\textwidth} 
+  \textbf{Monte Carlo}
+  \begin{itemize}
+      \item Choix \red{aléatoire} d'un coup jusqu'à la fin de la partie
+  \end{itemize}
+
+          \textbf{Propriétés}
+          \begin{itemize}
+              \item méthode générique
+              \item facile à implémenter
+              \item \textbf{non biaisé}
+              \item possibilité d'intégrer des connaissances expertes en utilisant une distribution non uniforme
+          \end{itemize}
+          A l'origine du nom \textbf{Monte Carlo Tree Search} 
+
+      \end{column}
+  \end{columns}
+
+
+
+}
+
+\frame{
+  \frametitle{Backpropagation}
+
+
+  \begin{center}
+    \includegraphics[width=0.3\textwidth]{figs/mcts_backpropagation.png}
+  \end{center}
+
+  \begin{itemize}
+      \item appliquée aux noeuds de l'arbre visités pendant la descente
+      \item \textbf{mise à jour des valeurs} en fonctions de l'évaluation
+  \end{itemize}
 }
 
 
-\fi
 \frame{
   \frametitle{Exemple}
 
@@ -530,25 +608,6 @@
 \iftrue
 
 
-\frame{
-  \frametitle{Évaluation}
-
-  \textbf{Monte Carlo}
-  \begin{itemize}
-      \item Choix \red{aléatoire} d'un coup jusqu'à la fin de la partie
-  \end{itemize}
-
-  Propriétés
-  \begin{itemize}
-      \item méthode générique
-      \item facile à implémenter
-      \item \textbf{non biaisé}
-      \item possibilité d'intégrer des connaissances expertes en utilisant une distribution non uniforme
-  \end{itemize}
-  A l'origine du nom \textbf{Monte Carlo Tree Search} mais cette évaluation peut être remplacée
-
-}
-
 
 \subsection{Problème de Bandit}
 
@@ -566,15 +625,15 @@
 \begin{frame}
     \frametitle{Autres problèmes similaires}
     \begin{center}
-        \includegraphics[scale=0.8]{figs/bandit_casino.jpg}
+        \includegraphics[scale=0.8]{figs/essai_clinique.jpg}
     \end{center}
     \begin{itemize}
-        \item Essais cliniques: trouver le traitement qui fonctionne le mieux.
-        \item Sélection d'un serveur dans un réseau: trouver le serveur avec le temps de réponse le plus faible.
-        \item Publicité ciblée: trouver le type de pub qui intéressera le plus un utilisateur.
+        \item \textit{Essais cliniques}: trouver le traitement qui fonctionne le mieux.
+        \item \textit{Sélection d'un serveur dans un réseau}: trouver le serveur avec le temps de réponse le plus faible.
+        \item \textit{Publicité ciblée}: trouver le type de pub qui intéressera le plus un utilisateur.
         \item ...
     \end{itemize}
-    Ce sont des problèmes où on a plusieurs fois le même choix à effectuer. Le choix conduit à une récompense aléatoire.
+    Ce sont des problèmes où on a \textbf{plusieurs fois le même choix} à effectuer. Le choix conduit à une \textbf{récompense aléatoire}.
 \end{frame}
 
 
@@ -610,7 +669,7 @@
 \begin{frame}
     \frametitle{Objectif}
 
-    Le but est d'optimiser le regret $R_n$ défini comme suit:
+    Le but est d'optimiser le \textbf{regret} $R_n$ défini comme suit:
 
     $$R_n=\mu^*n - \mathbb{E} \sum_{j=1}^{K}  T_j(n) \mu_j$$
     $$R_n=\sum_{j=1}^{K} \Delta_j \mathbb{E} [T_j(n)]$$
@@ -624,12 +683,13 @@
 
 
     Pour toute stratégie d'allocation et pour tout bras non optimal:
-    $$\mathbb{E} [T_j(n)] \ge \frac{\log n}{D(p_j || p^*)}$$
+    $$\mathbb{E} [T_j(n)] \ge C*\log n$$
 
-    $$\mbox{où }D(p_j || p^*) = \int p_j \log \frac{p_j}{p^*}$$
-    On en déduit que le meilleur regret atteignable est en ${\color{red} \log(n)}$.
+    où $C$ est une constante.
 
-    \hfill [Lai and Robbins, 1985]
+    On en déduit que le meilleur regret atteignable est en ${\color{red} \mathcal{O}( \log(n))}$.
+
+    \hfill \cite{lai1985asymptotically}
 
 \end{frame}
 
@@ -642,13 +702,13 @@
         \item A partir des informations disponibles au temps $t$, on calcule la borne de confiance supérieur (UCB) correspondant à chaque bras.
         \item On choisit le bras qui a la valeur UCB la plus grande.
     \end{itemize}
-    \hfill [Auer and all, 2002]
+    \hfill \cite{auer2002finite}
 \end{frame}
 
 \begin{frame}
     \frametitle{UCB}
     Calcul de la valeur UCB pour le bras $i$ au pas de temps $t$:
-    $$ {\color{red} \hat{\mu}_{i,t-1}} + {\color{green} \sqrt{\frac{3\log(t)}{2T_i(t-1)}}} $$
+    $$ \red{ \hat{\mu}_{i,t-1}} +  \sqrt{\frac{3\log(t)}{2T_i(t-1)}} $$
     où $\hat{\mu}_{i,t-1} $ correspond à la moyenne empirique du bras $i$.
     
 \end{frame}
@@ -656,8 +716,11 @@
 \begin{frame}
     \frametitle{UCB}
     Borne sur le regret:
-    $$ R_n \le 6*\sum_{i \ne i^*}\frac{\color{red}\log(n)}{\Delta_i} + K(\frac{\pi^2}{3}+1) $$
+    $$ R_n \le 6*\sum_{i \ne i^*}\frac{\red{\log(n)}}{\Delta_i} + C $$
     
+    où $C$ est une constante.
+
+    On en déduit que UCB est asymptotiquement \red{optimal}.
 \end{frame}
 
 
@@ -702,11 +765,16 @@
         \includegraphics[scale=0.5]{figs/bandit_cascade.png}
     \end{center}
 
+    On utilise UCB pour le résoudre.
+
+    MCTS + UCB = UCT (UCB applied to Tree)
+
+    \hfill \cite{kocsis2006bandit}
 
 \end{frame}
 
 \begin{frame}
-    \frametitle{UCB en pratique}
+    \frametitle{UCT en pratique}
     \begin{itemize}
         \item Ajout d'un paramètre $p$ de contrôle de l'exploration:
             $$ \hat{\mu}_{i,t-1} + {\color{blue}p} \sqrt{\frac{\log(t)}{T_i(t-1)}} $$
@@ -719,11 +787,11 @@
 \begin{frame}
     \frametitle{Améliorations}
     \begin{itemize}
-        \item Ordonner les bras du bandit
+        \item \textit{Ordonner les bras du bandit}
         \itemSo limiter le nombre de bras explorés
-        \item Ajouter de connaissances expertes \cite{chaslot2009adding}
+        \item \textit{Ajouter de connaissances expertes} \cite{chaslot2009adding}
         \itemSo modifier la formule de bandit ou la distribution de probabilité pour l'évaluation
-        \item Rapide Action Value Estimation (RAVE) \cite{gelly2007combining}
+        \item \textit{Rapide Action Value Estimation (RAVE)} \cite{gelly2007combining}
         \itemSo prendre en compte le fait qu'inverser la séquence de coup peut donner le même résultat
         \item ...
     \end{itemize}
@@ -794,7 +862,9 @@
       \end{column}
   \end{columns}
 
+  \vspace{1cm}
 
+  \hfill \cite{lee2009computational}
 }
 
 \section{Conclusion}
@@ -802,7 +872,19 @@
 \frame{
   \frametitle{Alphago}
 
-  TODO principe en 1 slide
+    \begin{center}
+        \includegraphics[width=1\textwidth]{figs/alphago_principe.png}
+    \end{center}
+    
+    \begin{itemize}
+        \item Utilisation de 3 réseaux de neurones profonds
+        \itemSo guider la \textbf{descente} dans l'arbre ($p_\sigma$)
+        \itemSo choisir les coups lors de l'\textbf{évaluation} ($p_\pi$)
+        \itemSo prédire la \textbf{valeur} d'un noeud ($v_\theta$)
+        \item le score propagé dépend de l'évaluation et de la valeur prédite
+    \end{itemize}
+
+    \hfill \cite{silver2016mastering}
 }
 
 \frame{
@@ -850,24 +932,23 @@
 }
 
 \frame{
-  \frametitle{Autres applications}
+  \frametitle{Exemple d'autres applications}
 
   \begin{itemize}
-      \item jeux:
+      \item \textbf{jeux}:
   \begin{itemize}
       \item jeux de plateaux
-      \itemSo Havannah \cite{ewals2012playing}, Hex \cite{arneson2009mohex}, ...
+      \itemSo \textit{Havannah} \cite{ewals2012playing}, \textit{Hex} \cite{arneson2009mohex}, ...
       \item jeux vidéos
-      \itemSo Ms. Pac-Man \cite{pepels2014real}, ...
+      \itemSo \textit{Ms. Pac-Man} \cite{pepels2014real}, ...
       \item jeux non déterministes
-      \itemSo Poker \cite{rubin2011computer}, Magic \cite{ward2009monte}, ...
+      \itemSo \textit{Poker} \cite{rubin2011computer}, \textit{Magic} \cite{ward2009monte}, ...
   \end{itemize}
-          \item autre:
+          \item \textbf{autre}:
   \begin{itemize}
-      \item couplage de graphe \cite{pinheiro2017geometric}
-      \item planification \cite{nakhost2009monte}
-      \item calcul de transformée de Fourier rapide \cite{de2009bandit}
-      \item ...
+      \item \textit{couplage de graphe} \cite{pinheiro2017geometric}
+      \item \textit{planification} \cite{nakhost2009monte}
+      \item \textit{calcul de transformée de Fourier rapide} \cite{de2009bandit}
   \end{itemize}
   \end{itemize}
 }
@@ -875,17 +956,24 @@
 \frame{
   \frametitle{Conclusion}
 
-  \begin{center}
-  \includegraphics[width=0.3\textwidth]{figs/go-intro.jpg}
-  \includegraphics[width=0.25\textwidth]{figs/mcts_exemple.png}
-  \end{center}
+  \begin{columns}
+      \begin{column}{0.5\textwidth}
+          \begin{center}
+            \includegraphics[width=0.8\textwidth]{figs/go-intro.jpg}
+          \end{center}
+      \end{column}
+      \begin{column}{0.5\textwidth} 
+          \begin{center}
+            \includegraphics[width=0.8\textwidth]{figs/mcts_exemple.png}
+          \end{center}
+      \end{column}
+  \end{columns}
 
   \begin{itemize}
       \item méthode d'exploration d'arbre \red{déséquilibré}
       \item a permis de battre les meilleurs humains au jeu de \textbf{Go}
       \item méthode \red{générique} pouvant être appliqué à d'autres problèmes
   \end{itemize}
-  TODO image
 }
 
 \begin{frame}[allowframebreaks]
