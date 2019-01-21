@@ -104,6 +104,11 @@
       \end{column}
   \end{columns}
 
+  \vspace{1cm}
+
+  \textit{If aliens exist they might play chess, but they certainly play Go.}
+
+  \hfill Edward Lasker
 
 }
 
@@ -162,8 +167,8 @@
       \only<2> { \includegraphics[width=0.4\textwidth]{figs/gorule_string2.png} }%
       \only<3> { \includegraphics[width=0.4\textwidth]{figs/gorule_string3.png} }%
       \only<4> { \includegraphics[width=0.4\textwidth]{figs/gorule_string4.png} }%
-      \only<5> { \includegraphics[width=0.4\textwidth]{figs/gorule_string5.png} }%
-      \only<6> { \includegraphics[width=0.4\textwidth]{figs/gorule_string6.png} }
+      %\only<5> { \includegraphics[width=0.4\textwidth]{figs/gorule_string5.png} }%
+      %\only<6> { \includegraphics[width=0.4\textwidth]{figs/gorule_string6.png} }
   \end{center}
 
 }
@@ -180,9 +185,9 @@
       \only<1> { \includegraphics[width=0.4\textwidth]{figs/gorule_capture1.png} }%
       \only<2> { \includegraphics[width=0.4\textwidth]{figs/gorule_capture2.png} }%
       \only<3> { \includegraphics[width=0.4\textwidth]{figs/gorule_capture3.png} }%
-      \only<4> { \includegraphics[width=0.4\textwidth]{figs/gorule_capture4.png} }%
-      \only<5> { \includegraphics[width=0.4\textwidth]{figs/gorule_capture5.png} }%
-      \only<6> { \includegraphics[width=0.4\textwidth]{figs/gorule_capture6.png} }
+      %\only<4> { \includegraphics[width=0.4\textwidth]{figs/gorule_capture4.png} }%
+      %\only<5> { \includegraphics[width=0.4\textwidth]{figs/gorule_capture5.png} }%
+      %\only<6> { \includegraphics[width=0.4\textwidth]{figs/gorule_capture6.png} }
   \end{center}
 
 }
@@ -192,18 +197,18 @@
 
   \begin{itemize}
       \item partie terminée quand les deux joueurs passent
-      \item score: nombre de pierres + territoire + bonus pour blanc (komi)
+      \item score: nb de pierres + territoire + bonus pour blanc (komi)
   \end{itemize}
 
   \begin{center}
       \only<1> { \includegraphics[width=0.4\textwidth]{figs/gorule_score1.png} }%
-      \only<2> { \includegraphics[width=0.4\textwidth]{figs/gorule_score2.png} }%
-      \only<3> { \includegraphics[width=0.4\textwidth]{figs/gorule_score3.png} }%
-      \only<4> { \includegraphics[width=0.4\textwidth]{figs/gorule_score4.png} }%
-      \only<5> { \includegraphics[width=0.4\textwidth]{figs/gorule_score5.png} }
+      %\only<2> { \includegraphics[width=0.4\textwidth]{figs/gorule_score2.png} }%
+      \only<2> { \includegraphics[width=0.4\textwidth]{figs/gorule_score3.png} }%
+      %\only<4> { \includegraphics[width=0.4\textwidth]{figs/gorule_score4.png} }%
+      \only<3> { \includegraphics[width=0.4\textwidth]{figs/gorule_score5.png} }
   \end{center}
-  \only<3> {score noir: 13 (pierres) + 29 (territoire)=\textbf{42}}
-  \only<5> {score blanc: 13 (pierres) + 26 (territoire) + 7.5 (komi)=\textbf{46.5}}
+  \only<2> {score noir: 13 (pierres) + 29 (territoire)=\textbf{42}}
+  \only<3> {score blanc: 13 (pierres) + 26 (territoire) + 7.5 (komi)=\textbf{46.5}}
 
 }
 
@@ -430,7 +435,7 @@
 
 
   \begin{center}
-    \includegraphics[width=1\textwidth]{figs/mcts-algorithm.png}
+    \includegraphics[width=1\textwidth]{figs/mcts.png}
   \end{center}
 
   \hfill \cite{chaslot2008monte}
@@ -440,14 +445,14 @@
   \frametitle{Descente}
 
   \begin{center}
-    \includegraphics[width=0.3\textwidth]{figs/mcts_selection.png}
+    \includegraphics[width=0.3\textwidth]{figs/selection.png}
   \end{center}
 
   \begin{itemize}
       \item partir de la \textbf{racine}
-      \item \red{choisir} un noeud fils (détaillé plus tard)
+      \item \red{choisir} un nœud fils (détaillé plus tard)
       \item \textbf{répéter} récursivement
-      \item s'arrêter dès qu'on atteint un noeud en dehors de l'arbre (le noeud $frontier$)
+      \item s'arrêter dès qu'on atteint un nœud en dehors de l'arbre (le nœud $frontier$)
   \end{itemize}
 }
 
@@ -456,11 +461,11 @@
 
 
   \begin{center}
-    \includegraphics[width=0.3\textwidth]{figs/mcts_expansion.png}
+    \includegraphics[width=0.3\textwidth]{figs/expansion.png}
   \end{center}
 
   \begin{itemize}
-      \item ajouter le noeud $frontier$ à l'arbre
+      \item ajouter le nœud $frontier$ à l'arbre
   \end{itemize}
 }
 
@@ -470,7 +475,7 @@
   \begin{columns}
       \begin{column}{0.3\textwidth}
           \begin{center}
-              \includegraphics[width=1\textwidth]{figs/mcts_simulation.png}
+              \includegraphics[width=1\textwidth]{figs/simulation.png}
           \end{center}
       \end{column}
       \begin{column}{0.7\textwidth} 
@@ -500,11 +505,11 @@
 
 
   \begin{center}
-    \includegraphics[width=0.3\textwidth]{figs/mcts_backpropagation.png}
+    \includegraphics[width=0.3\textwidth]{figs/backpropagation.png}
   \end{center}
 
   \begin{itemize}
-      \item appliquée aux noeuds de l'arbre visités pendant la descente
+      \item appliquée aux nœuds de l'arbre visités pendant la descente
       \item \textbf{mise à jour des valeurs} en fonctions de l'évaluation
   \end{itemize}
 }
@@ -851,7 +856,7 @@
           \begin{itemize}
               \item programme: MoGoTW
               \itemSo MCTS avec de nombreuses améliorations
-              \itemSo 32 machines de 8 coeurs
+              \itemSo 32 machines de 8 cœurs
               \item adversaire: C.-H. Chou (pro 9 dan)
           \end{itemize}
       \end{column}
@@ -880,7 +885,7 @@
         \item Utilisation de 3 réseaux de neurones profonds
         \itemSo guider la \textbf{descente} dans l'arbre ($p_\sigma$)
         \itemSo choisir les coups lors de l'\textbf{évaluation} ($p_\pi$)
-        \itemSo prédire la \textbf{valeur} d'un noeud ($v_\theta$)
+        \itemSo prédire la \textbf{valeur} d'un nœud ($v_\theta$)
         \item le score propagé dépend de l'évaluation et de la valeur prédite
     \end{itemize}
 
