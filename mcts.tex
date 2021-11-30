@@ -435,7 +435,7 @@
 
 
   \begin{center}
-    \includegraphics[width=1\textwidth]{figs/mcts-algorithm.png}
+    \includegraphics[width=1\textwidth]{figs/mcts.png}
   \end{center}
 
   \hfill \cite{chaslot2008monte}
@@ -445,14 +445,14 @@
   \frametitle{Descente}
 
   \begin{center}
-    \includegraphics[width=0.3\textwidth]{figs/mcts_selection.png}
+    \includegraphics[width=0.3\textwidth]{figs/selection.png}
   \end{center}
 
   \begin{itemize}
       \item partir de la \textbf{racine}
-      \item \red{choisir} un noeud fils (détaillé plus tard)
+      \item \red{choisir} un nœud fils (détaillé plus tard)
       \item \textbf{répéter} récursivement
-      \item s'arrêter dès qu'on atteint un noeud en dehors de l'arbre (le noeud $frontier$)
+      \item s'arrêter dès qu'on atteint un nœud en dehors de l'arbre (le nœud $frontier$)
   \end{itemize}
 }
 
@@ -461,11 +461,11 @@
 
 
   \begin{center}
-    \includegraphics[width=0.3\textwidth]{figs/mcts_expansion.png}
+    \includegraphics[width=0.3\textwidth]{figs/expansion.png}
   \end{center}
 
   \begin{itemize}
-      \item ajouter le noeud $frontier$ à l'arbre
+      \item ajouter le nœud $frontier$ à l'arbre
   \end{itemize}
 }
 
@@ -475,7 +475,7 @@
   \begin{columns}
       \begin{column}{0.3\textwidth}
           \begin{center}
-              \includegraphics[width=1\textwidth]{figs/mcts_simulation.png}
+              \includegraphics[width=1\textwidth]{figs/simulation.png}
           \end{center}
       \end{column}
       \begin{column}{0.7\textwidth} 
@@ -505,11 +505,11 @@
 
 
   \begin{center}
-    \includegraphics[width=0.3\textwidth]{figs/mcts_backpropagation.png}
+    \includegraphics[width=0.3\textwidth]{figs/backpropagation.png}
   \end{center}
 
   \begin{itemize}
-      \item appliquée aux noeuds de l'arbre visités pendant la descente
+      \item appliquée aux nœuds de l'arbre visités pendant la descente
       \item \textbf{mise à jour des valeurs} en fonctions de l'évaluation
   \end{itemize}
 }
@@ -906,7 +906,7 @@
           \begin{itemize}
               \item programme: MoGoTW
               \itemSo MCTS avec de nombreuses améliorations
-              \itemSo 32 machines de 8 coeurs
+              \itemSo 32 machines de 8 cœurs
               \item adversaire: C.-H. Chou (pro 9 dan)
           \end{itemize}
       \end{column}
@@ -935,7 +935,7 @@
         \item Utilisation de 3 réseaux de neurones profonds
         \itemSo guider la \textbf{descente} dans l'arbre ($p_\sigma$)
         \itemSo choisir les coups lors de l'\textbf{évaluation} ($p_\pi$)
-        \itemSo prédire la \textbf{valeur} d'un noeud ($v_\theta$)
+        \itemSo prédire la \textbf{valeur} d'un nœud ($v_\theta$)
         \item le score propagé dépend de l'évaluation et de la valeur prédite
     \end{itemize}
 
