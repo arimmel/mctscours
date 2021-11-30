@@ -65,10 +65,35 @@
 \section{IA et Jeu de Go}
 
 
+\frame{
+  \frametitle{Le jeu de Go}
 
+  \begin{columns}
+      \begin{column}{0.3\textwidth}
+          \begin{center}
+              \includegraphics[width=1\textwidth]{figs/gohistory.jpg}
+          \end{center}
+      \end{column}
+      \begin{column}{0.7\textwidth} 
+          \begin{itemize}
+              \item \red{jeu de plateau}
+              \item deux joueurs, information complète, déterministe
+              \item inventé en chine en 2000 BC
+              \item aujourd'hui, environ 20 millions de joueurs
+          \end{itemize}
+      \end{column}
+  \end{columns}
+
+  \vspace{1cm}
+
+  \textit{If aliens exist they might play chess, but they certainly play Go.}
+
+  \hfill Edward Lasker
+
+}
 
 \frame{
-  \frametitle{Pourquoi une IA pour le jeu de go?}
+  \frametitle{Pourquoi le jeu de go comme application pour les algorithmes?}
 
   \begin{center}
   \includegraphics[width=0.5\textwidth]{figs/go-intro.jpg}
@@ -84,50 +109,28 @@
 
 
 
-\frame{
-  \frametitle{Histoire}
-
-  \begin{columns}
-      \begin{column}{0.3\textwidth}
-          \begin{center}
-              \includegraphics[width=1\textwidth]{figs/gohistory.jpg}
-          \end{center}
-      \end{column}
-      \begin{column}{0.7\textwidth} 
-          \begin{itemize}
-              \item aurait été inventé en chine en 2000 BC
-              \item premiers écrits: 500 BC
-              \item fait parti des 4 arts majeurs chinois: peinture, calligraphie, guqin, \textit{go}
-              \item se répand en Asie dès 800 dans la noblesse
-              \item aujourd'hui, environ 20 millions de joueurs
-          \end{itemize}
-      \end{column}
-  \end{columns}
 
 
-}
-
-\frame{
-  \frametitle{Matériel}
-
-  \begin{columns}
-      \begin{column}{0.6\textwidth}
-          \begin{itemize}
-              \item plateau de jeu: Goban
-              \item deux tailles 9x9 ou 19x19
-              \item pierres noires et blanches 
-          \end{itemize}
-      \end{column}
-      \begin{column}{0.4\textwidth} 
-          \begin{center}
-              \includegraphics[width=1\textwidth]{figs/gomatos.png}
-          \end{center}
-      \end{column}
-  \end{columns}
-
-
-
-}
+%  \frametitle{Matériel}
+%
+%  \begin{columns}
+%      \begin{column}{0.6\textwidth}
+%          \begin{itemize}
+%              \item plateau de jeu: Goban
+%              \item deux tailles 9x9 ou 19x19
+%              \item pierres noires et blanches 
+%          \end{itemize}
+%      \end{column}
+%      \begin{column}{0.4\textwidth} 
+%          \begin{center}
+%              \includegraphics[width=1\textwidth]{figs/gomatos.png}
+%          \end{center}
+%      \end{column}
+%  \end{columns}
+%
+%
+%
+%}
 
 \frame{
   \frametitle{Règles: placement}
@@ -140,10 +143,10 @@
   \end{itemize}
 
   \begin{center}
-      \only<1> { \includegraphics[width=0.4\textwidth]{figs/gorule1.png} }%
-      \only<2> { \includegraphics[width=0.4\textwidth]{figs/gorule2.png} }%
-      \only<3> { \includegraphics[width=0.4\textwidth]{figs/gorule3.png} }%
-      \only<4> { \includegraphics[width=0.4\textwidth]{figs/gorule4.png} }
+%      \only<1> { \includegraphics[width=0.4\textwidth]{figs/gorule1.png} }%
+%      \only<2> { \includegraphics[width=0.4\textwidth]{figs/gorule2.png} }%
+%      \only<3> { \includegraphics[width=0.4\textwidth]{figs/gorule3.png} }%
+      \includegraphics[width=0.4\textwidth]{figs/gorule4.png} 
   \end{center}
 
 
@@ -158,12 +161,12 @@
   \end{itemize}
 
   \begin{center}
-      \only<1> { \includegraphics[width=0.4\textwidth]{figs/gorule_string1.png} }%
-      \only<2> { \includegraphics[width=0.4\textwidth]{figs/gorule_string2.png} }%
-      \only<3> { \includegraphics[width=0.4\textwidth]{figs/gorule_string3.png} }%
-      \only<4> { \includegraphics[width=0.4\textwidth]{figs/gorule_string4.png} }%
-      \only<5> { \includegraphics[width=0.4\textwidth]{figs/gorule_string5.png} }%
-      \only<6> { \includegraphics[width=0.4\textwidth]{figs/gorule_string6.png} }
+%      \only<1> { \includegraphics[width=0.4\textwidth]{figs/gorule_string1.png} }%
+       %\includegraphics[width=0.4\textwidth]{figs/gorule_string2.png} 
+       \includegraphics[width=0.4\textwidth]{figs/gorule_string3.png} 
+      %\includegraphics[width=0.4\textwidth]{figs/gorule_string4.png} 
+      %\only<5> { \includegraphics[width=0.4\textwidth]{figs/gorule_string5.png} }%
+      %\only<6> { \includegraphics[width=0.4\textwidth]{figs/gorule_string6.png} }
   \end{center}
 
 }
@@ -177,12 +180,12 @@
   \end{itemize}
 
   \begin{center}
-      \only<1> { \includegraphics[width=0.4\textwidth]{figs/gorule_capture1.png} }%
-      \only<2> { \includegraphics[width=0.4\textwidth]{figs/gorule_capture2.png} }%
-      \only<3> { \includegraphics[width=0.4\textwidth]{figs/gorule_capture3.png} }%
-      \only<4> { \includegraphics[width=0.4\textwidth]{figs/gorule_capture4.png} }%
-      \only<5> { \includegraphics[width=0.4\textwidth]{figs/gorule_capture5.png} }%
-      \only<6> { \includegraphics[width=0.4\textwidth]{figs/gorule_capture6.png} }
+    %  \only<1> { \includegraphics[width=0.4\textwidth]{figs/gorule_capture1.png} }%
+       \includegraphics[width=0.4\textwidth]{figs/gorule_capture2.png} 
+      %\includegraphics[width=0.4\textwidth]{figs/gorule_capture3.png} 
+      %\only<4> { \includegraphics[width=0.4\textwidth]{figs/gorule_capture4.png} }%
+      %\only<5> { \includegraphics[width=0.4\textwidth]{figs/gorule_capture5.png} }%
+      %\only<6> { \includegraphics[width=0.4\textwidth]{figs/gorule_capture6.png} }
   \end{center}
 
 }
@@ -192,18 +195,18 @@
 
   \begin{itemize}
       \item partie terminée quand les deux joueurs passent
-      \item score: nombre de pierres + territoire + bonus pour blanc (komi)
+      \item score: nb de pierres + territoire + bonus pour blanc (komi)
   \end{itemize}
 
   \begin{center}
-      \only<1> { \includegraphics[width=0.4\textwidth]{figs/gorule_score1.png} }%
-      \only<2> { \includegraphics[width=0.4\textwidth]{figs/gorule_score2.png} }%
-      \only<3> { \includegraphics[width=0.4\textwidth]{figs/gorule_score3.png} }%
-      \only<4> { \includegraphics[width=0.4\textwidth]{figs/gorule_score4.png} }%
-      \only<5> { \includegraphics[width=0.4\textwidth]{figs/gorule_score5.png} }
+       \includegraphics[width=0.4\textwidth]{figs/gorule_score1.png} 
+      %\only<2> { \includegraphics[width=0.4\textwidth]{figs/gorule_score2.png} }%
+      %\only<2> { \includegraphics[width=0.4\textwidth]{figs/gorule_score3.png} }%
+      %\only<4> { \includegraphics[width=0.4\textwidth]{figs/gorule_score4.png} }%
+      %\only<3> { \includegraphics[width=0.4\textwidth]{figs/gorule_score5.png} }
   \end{center}
-  \only<3> {score noir: 13 (pierres) + 29 (territoire)=\textbf{42}}
-  \only<5> {score blanc: 13 (pierres) + 26 (territoire) + 7.5 (komi)=\textbf{46.5}}
+  %\only<2> {score noir: 13 (pierres) + 29 (territoire)=\textbf{42}}
+  %\only<3> {score blanc: 13 (pierres) + 26 (territoire) + 7.5 (komi)=\textbf{46.5}}
 
 }
 
@@ -220,13 +223,15 @@
   \begin{itemize}
       \item problème: captures répétées successives
       \item règle (humain): pas le droit de remettre le plateau dans l'état juste avant
-      \item règle (ordinateur): pas le droit de remettre le plateau dans n'importe quel état précédant
+      \item règle (ordinateur): pas le droit de remettre le plateau dans n'importe quel état précédent
   \end{itemize}
 
   }
 
 
 }
+
+
 
 \frame{
   \frametitle{Échelle de niveau}
@@ -484,7 +489,7 @@
               \item méthode générique
               \item facile à implémenter
               \item \textbf{non biaisé}
-              \item possibilité d'intégrer des connaissances expertes en utilisant une distribution non uniforme
+              \item possibilité d'intégrer des \blue{connaissances expertes} en utilisant une \blue{distribution non uniforme}
           \end{itemize}
           A l'origine du nom \textbf{Monte Carlo Tree Search} 
 
@@ -695,6 +700,7 @@
 
 
 
+
 \begin{frame}
     \frametitle{UCB}
     Principe de l'algorithme:
@@ -714,6 +720,22 @@
 \end{frame}
 
 \begin{frame}
+    \frametitle{idée pour UCB}
+
+    Inégalité de \textbf{Chernoff-Hoeffding} pour le bras $i$:
+    $$ \mathbb{P}(\hat{\mu}_{i,t} - \mu_i >= \epsilon) \le e^{-2T_i(t) \epsilon^2}$$
+    
+
+    on fixe $e^{-2T_i(t) \epsilon^2}=t^{-3}$
+
+    on obtient: 
+    $$\epsilon=\sqrt{\frac{3\log(t)}{2T_i(t)}}$$
+
+
+    
+\end{frame}
+
+\begin{frame}
     \frametitle{UCB}
     Borne sur le regret:
     $$ R_n \le 6*\sum_{i \ne i^*}\frac{\red{\log(n)}}{\Delta_i} + C $$
@@ -721,6 +743,39 @@
     où $C$ est une constante.
 
     On en déduit que UCB est asymptotiquement \red{optimal}.
+\end{frame}
+
+\begin{frame}
+    \frametitle{idée de la preuve}
+    On borne $\mathbb{E}[T_i(t)]$ pour un bras $i$ non optimal
+
+    \begin{itemize}
+        \item Cas probabilités respectées
+
+            $$ \text{pour tout $i$:} \quad \mu_{i}-\sqrt{\frac{3\log(t)}{2T_i(t)}} \le \hat{\mu}_{i,t} \le  \mu_{i}+\sqrt{\frac{3\log(t)}{2T_i(t)}}$$
+
+            $$ \text{bras $i$ choisi}  \quad \Rightarrow \quad \hat{\mu}_{i,t}+\sqrt{\frac{3\log(t)}{2T_i(t)}} \ge \hat{\mu}^{*} +\sqrt{\frac{3\log(t)}{2T^*(t)}}$$
+
+            $$ \Rightarrow \mu_{i}+2*\sqrt{\frac{3\log(t)}{2T_i(t)}} \ge \mu^{*} $$
+
+            $$ \Rightarrow T_i(t) \le \frac{6log(t)}{\Delta_i^2} $$
+
+    \end{itemize}
+
+   
+\end{frame}
+
+\begin{frame}
+    \frametitle{idée de la preuve}
+    On borne $\mathbb{E}[T_i(t)]$ pour un bras $i$ non optimal
+
+    \begin{itemize}
+
+        \item Cas probabilités non-respectées ($t^{-3}$)
+        \itemSo borné par une constante: $\frac{\pi^2}{3}+1$
+    \end{itemize}
+
+   
 \end{frame}
 
 
