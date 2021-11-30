@@ -714,9 +714,19 @@
 \begin{frame}
     \frametitle{UCB}
     Calcul de la valeur UCB pour le bras $i$ au pas de temps $t$:
-    $$ \red{ \hat{\mu}_{i,t-1}} +  \sqrt{\frac{3\log(t)}{2T_i(t-1)}} $$
+    $$  \hat{\mu}_{i,t-1} +  \sqrt{\frac{3\log(t)}{2T_i(t-1)}} $$
     où $\hat{\mu}_{i,t-1} $ correspond à la moyenne empirique du bras $i$.
     
+\end{frame}
+
+\begin{frame}
+    \frametitle{UCB}
+    Compromis entre \red{Exploitation} et \blue{Eploration}
+    $$ \red{ \hat{\mu}_{i,t-1}} +  \blue{ \sqrt{\frac{3\log(t)}{2T_i(t-1)}}} $$
+
+    $\red{ \hat{\mu}_{i,t-1}}$ est élevé quand le bras $i$ a de bons résultats.
+
+    $\blue{ \frac{\log(t)}{T_i(t-1)}} $ est élevé quand le bras $i$ a été peu choisi.
 \end{frame}
 
 \begin{frame}
