@@ -210,26 +210,26 @@
 
 }
 
-\frame{
-  \frametitle{Règles: le ko}
-
-
-  \begin{center}
-      \only<1> { \includegraphics[width=0.4\textwidth]{figs/gorule_ko1.png} }%
-      \only<2> { \includegraphics[width=0.4\textwidth]{figs/gorule_ko2.png} }%
-      \only<3-> { \includegraphics[width=0.4\textwidth]{figs/gorule_ko3.png} }
-  \end{center}
-  \only<4> {
-  \begin{itemize}
-      \item problème: captures répétées successives
-      \item règle (humain): pas le droit de remettre le plateau dans l'état juste avant
-      \item règle (ordinateur): pas le droit de remettre le plateau dans n'importe quel état précédent
-  \end{itemize}
-
-  }
-
-
-}
+%\frame{
+%  \frametitle{Règles: le ko}
+%
+%
+%  \begin{center}
+%      \only<1> { \includegraphics[width=0.4\textwidth]{figs/gorule_ko1.png} }%
+%      \only<2> { \includegraphics[width=0.4\textwidth]{figs/gorule_ko2.png} }%
+%      \only<3-> { \includegraphics[width=0.4\textwidth]{figs/gorule_ko3.png} }
+%  \end{center}
+%  \only<4> {
+%  \begin{itemize}
+%      \item problème: captures répétées successives
+%      \item règle (humain): pas le droit de remettre le plateau dans l'état juste avant
+%      \item règle (ordinateur): pas le droit de remettre le plateau dans n'importe quel état précédent
+%  \end{itemize}
+%
+%  }
+%
+%
+%}
 
 
 
@@ -617,7 +617,7 @@
 \subsection{Problème de Bandit}
 
 \begin{frame}
-    \frametitle{Introduction du problème}
+    \frametitle{Problème de bandit}
     \begin{center}
         \includegraphics[scale=0.8]{figs/bandit_casino.jpg}
     \end{center}
@@ -946,8 +946,9 @@
         \itemSo guider la \textbf{descente} dans l'arbre ($p_\sigma$)
         \itemSo choisir les coups lors de l'\textbf{évaluation} ($p_\pi$)
         \itemSo prédire la \textbf{valeur} d'un nœud ($v_\theta$)
-        \item le score propagé dépend de l'évaluation et de la valeur prédite
+        \item AlphaGo Zero utilise un seul réseau
     \end{itemize}
+
 
     \hfill \cite{silver2016mastering}
 }
@@ -1036,8 +1037,8 @@
 
   \begin{itemize}
       \item méthode d'exploration d'arbre \red{déséquilibré}
-      \item a permis de battre les meilleurs humains au jeu de \textbf{Go}
       \item méthode \red{générique} pouvant être appliqué à d'autres problèmes
+      \item le problème de \textbf{bandit}: applicable à de nombreuses situations et très étudié
   \end{itemize}
 }
 
