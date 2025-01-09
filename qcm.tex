@@ -1,0 +1,41 @@
+\documentclass{article}
+
+\renewcommand{\labelenumii}{\arabic{enumii}.}
+\newcommand{\itembf}{\item[\stepcounter{enumii}\textbf{\arabic{enumii}.}]}
+
+\begin{document} 
+
+\title{Questions Conférence - Monte Carlo Tree Search (MCTS)}
+\date{}
+\maketitle
+\begin{enumerate}
+    \item Laquelle(lesquelles) de ces propriétés concernant l'algorithme MCTS est(sont) vraie(s)?
+    \begin{enumerate}
+        \item L'algorithme explore la totalité de l'arbre des parties possibles.
+        \itembf \textbf{L'arbre de recherche est déséquilibré.}
+        \itembf \textbf{L'algorithme est itératif.}
+        \item L'algorithme est déterministe.
+    \end{enumerate}
+    \item Quelles sont les étapes de l'algorithme MCTS?
+    \begin{enumerate}
+        \item Selection, Evaluation, Update.
+        \item Descent, Evaluation, Update.
+        \item Selection, Expansion, Update, Backpropagation.
+        \itembf \textbf{Selection, Expansion, Simulation, Backpropagation.}
+    \end{enumerate}
+    \item Laquelle(lesquelles) de ces informations concernant le problème du bandit est(sont) vraie(s)?
+    \begin{enumerate}
+        \item Les distributions de probabilités de chaque bras sont identiques.
+        \item Le but est de maximiser les profits.
+        \itembf \textbf{Le tirage de chaque bras est indépendant et identiquement distribué.}
+        \itembf \textbf{Toute stratégie ne peut obtenir de meilleur performance que O(log(n)) fois la stratégie optimale.}
+    \end{enumerate}
+\item Laquelle(lesquelles) de ces informations concernant l'algorithme Upper Confidence Bound (UCB) est(sont) vraie(s)?
+    \begin{enumerate}
+        \itembf \textbf{L'algorithme est basé sur un compromis exploration/exploitation.}
+        \item L'algorithme est randomisé.
+        \itembf \textbf{L'algorithme est asymptotiquement optimal.}
+        \item L'algorithme choisit à chaque étape le bras associé au plus grand écart type.
+    \end{enumerate}
+\end{enumerate}
+\end{document}
